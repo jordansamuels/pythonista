@@ -9,6 +9,12 @@ PYTHON_CMD := PYTHONPATH=$(CURDIR) $(PYTHON)
 PROJECT_NAME=$(shell basename $(CURDIR))
 PYLINT_CMD := $(PYTHON_CMD) -m pylint $(PROJECT_NAME) test
 
+ifeq (Darwin,$(shell uname))
+MINICONDA_OS=MacOSX
+else
+MINICONDA_OS=Linux
+endif
+
 ifndef VERBOSE
 .SILENT:
 endif
@@ -25,7 +31,7 @@ $(PROJECT_NAME):
 
 $(CONDA): | $(PROJECT_NAME)
 	echo "Installing Miniconda3 to $(MINICONDA)"
-	wget https://repo.anaconda.com/miniconda/Miniconda3-py39_$(CONDA_VERSION)-Linux-x86_64.sh -O $(CURDIR)/miniconda.sh
+	wget https://repo.anaconda.com/miniconda/Miniconda3-py39_$(CONDA_VERSION)-$(MINICONDA_OS)-x86_64.sh -O $(CURDIR)/miniconda.sh
 	bash $(CURDIR)/miniconda.sh -u -b -p "$(CURDIR)/.miniconda3"
 	rm $(CURDIR)/miniconda.sh
 
