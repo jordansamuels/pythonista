@@ -15,18 +15,13 @@ else
 MINICONDA_OS=Linux
 endif
 
-ifndef VERBOSE
-.SILENT:
-endif
-
 .PHONY: help
 help:
 	grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-$(PROJECT_NAME):
-	# Initialize the project
+$(PROJECT_NAME):  ## Initialize the project
 	git mv pythonista $(PROJECT_NAME)
-	sed -i "s/pythonista/$(PROJECT_NAME)/g" test/main_test.py
+	sed -i"" -e "s/pythonista/$(PROJECT_NAME)/g" test/main_test.py
 	git add test/main_test.py
 
 $(CONDA): | $(PROJECT_NAME)
