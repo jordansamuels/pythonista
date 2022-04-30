@@ -1,6 +1,6 @@
 import io
 
-from pythonista import main
+from asdf import main
 
 def test_main_wants_arguments():
     output = io.StringIO()
