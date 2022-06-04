@@ -9,7 +9,7 @@ To create a new project based on this skeleton, create a new directory with the 
 
 ```
 git init
-git pull git@github.com:benrady/pythonista.git
+git pull [this repo]
 make test
 git commit -am "Initial version"
 
